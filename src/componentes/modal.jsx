@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../services/supabase";
+import { supabase, BUCKET_URL } from "../services/supabase";
 
 export default function Modal({ item, onClose }) {
   const [equipos, setEquipos] = useState([]);
@@ -99,7 +99,7 @@ export default function Modal({ item, onClose }) {
             <aside className="space-y-6 lg:space-y-8 lg:sticky lg:top-10 self-start">
 
               <img
-                src={item.imagen || "images/avatar-placeholder.png"}
+                src={`${BUCKET_URL}${item.imagen}`}
                 alt={item.nombre}
                 className="
                   w-40 h-40
@@ -107,6 +107,9 @@ export default function Modal({ item, onClose }) {
                   lg:w-72 lg:h-72
                   rounded-3xl object-cover shadow-xl bg-gray-200
                 "
+                onError={(e) => {
+                  e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
+                }}
               />
 
               <div className="space-y-2">
@@ -235,7 +238,7 @@ export default function Modal({ item, onClose }) {
                 "
               >
                 <img
-                  src={item.imagen || "images/avatar-placeholder.png"}
+                  src={`${BUCKET_URL}${item.imagen}`}
                   alt={item.nombre}
                   className="
                     w-40 h-40
@@ -246,6 +249,9 @@ export default function Modal({ item, onClose }) {
                     shadow-xl
                     bg-gray-200
                   "
+                  onError={(e) => {
+                    e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
+                  }}
                 />
 
                 <div className="space-y-2">
@@ -387,7 +393,7 @@ export default function Modal({ item, onClose }) {
               <div className="flex flex-col items-center gap-6 lg:gap-8">
 
                 <img
-                  src={item.logo || "images/logo-placeholder.png"}
+                  src={`${BUCKET_URL}${item.logo}`}
                   alt={item.nombre}
                   className="
                     max-h-32
@@ -397,7 +403,7 @@ export default function Modal({ item, onClose }) {
                     object-contain
                   "
                   onError={(e) => {
-                    e.currentTarget.src = "images/logo-placeholder.png";
+                    e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
                   }}
                 />
 
@@ -450,7 +456,7 @@ export default function Modal({ item, onClose }) {
             <div className="max-w-6xl mx-auto space-y-8 lg:space-y-10">
 
               <img
-                src={item.imagen || "images/logo-placeholder.png"}
+                src={`${BUCKET_URL}${item.imagen}`}
                 alt={item.nombre}
                 className="
                   max-h-32
@@ -461,7 +467,7 @@ export default function Modal({ item, onClose }) {
                   mx-auto
                 "
                 onError={(e) => {
-                  e.currentTarget.src = "images/logo-placeholder.png";
+                  e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
                 }}
               />
 

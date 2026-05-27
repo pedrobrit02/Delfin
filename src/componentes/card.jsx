@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { BUCKET_URL } from "../services/supabase";
 import {
   GlobeAltIcon,
   AcademicCapIcon,
@@ -68,13 +69,13 @@ const Card = ({ item, onClick }) => {
           <img
             src={
               ehPessoa
-                ? item.imagen || "images/avatar-placeholder.png"
-                : item.logo || item.imagen || "images/logo-placeholder.png"
+                ? `${BUCKET_URL}${item.imagen}`
+                : `${BUCKET_URL}${item.logo || item.imagen}`
             }
             alt={titulo}
             className="w-full h-full object-cover"
             onError={(e) => {
-              e.currentTarget.src = "images/logo-placeholder.png";
+              e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
             }}
           />
         </div>

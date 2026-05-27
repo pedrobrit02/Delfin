@@ -7,7 +7,5 @@ export const supabase = createClient(
   supabaseUrl,
   supabaseAnonKey
 );
-console.log(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+
+export const BUCKET_URL = "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/";
