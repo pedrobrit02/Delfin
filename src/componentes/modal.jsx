@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { supabase, BUCKET_URL } from "../services/supabase";
 
-// Dicionário de correção completo para garantir que o nome do arquivo no banco case com o storage
-const MAPPINGS = {
-  "ifmg_ibirite.jpg": "ifmg_ibirite%20(1).jpg",
-  "delfin.jpg": "delfin.jpg",
-  "Foto_Maye.jpg": "Foto_Maye.jpg",
-  "Jorge.jpeg": "Jorge.jpeg",
-  "JORGE_BALDARRAGO.jpeg": "JORGE_BALDARRAGO.jpeg",
-  "logo_Flui.jpg": "logo_Flui.jpg",
-  "Nancy.jpg": "Nancy.jpg",
-  "Paola.jpg": "Paola.jpg",
-  "pedro.jpeg": "pedro.jpeg",
-  "UCV.jpg": "UCV.jpg"
+// Todos os links exatos e diretos, sem concatenação
+const LINKS_DIRETOS = {
+  "delfin.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/delfin.jpg",
+  "Foto_Maye.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Foto_Maye.jpg",
+  "ifmg_ibirite.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/ifmg_ibirite%20(1).jpg",
+  "ifmg_ibirite (1).jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/ifmg_ibirite%20(1).jpg",
+  "Jorge.jpeg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Jorge.jpeg",
+  "JORGE_BALDARRAGO.jpeg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/JORGE_BALDARRAGO.jpeg",
+  "logo_Flui.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/logo_Flui.jpg",
+  "Nancy.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Nancy.jpg",
+  "Paola.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Paola.jpg",
+  "pedro.jpeg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/pedro.jpeg",
+  "UCV.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/UCV.jpg"
 };
 
 export default function Modal({ item, onClose }) {
@@ -25,11 +25,10 @@ export default function Modal({ item, onClose }) {
     };
   }, []);
 
-  // Função auxiliar para aplicar o mapeamento de nome de arquivo
+  // Busca o link direto. Se o banco não mandar nada, puxa a logo direto do link absoluto.
   const getImageUrl = (filename) => {
-    if (!filename) return `${BUCKET_URL}logo_Flui.jpg`;
-    const targetName = MAPPINGS[filename] || filename;
-    return `${BUCKET_URL}${targetName}`;
+    if (!filename) return "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/logo_Flui.jpg";
+    return LINKS_DIRETOS[filename] || "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/logo_Flui.jpg";
   };
 
   const SectionBox = ({ title, children }) => (
@@ -114,7 +113,7 @@ export default function Modal({ item, onClose }) {
             lg:px-14 lg:py-12
           "
         >
-        {item.__tipo === "docente" && (
+          {item.__tipo === "docente" && (
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 lg:gap-16">
 
             <aside className="space-y-6 lg:space-y-8 lg:sticky lg:top-10 self-start">
@@ -128,9 +127,6 @@ export default function Modal({ item, onClose }) {
                   lg:w-72 lg:h-72
                   rounded-3xl object-cover shadow-xl bg-gray-200
                 "
-                onError={(e) => {
-                  e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
-                }}
               />
 
               <div className="space-y-2">
@@ -237,8 +233,7 @@ export default function Modal({ item, onClose }) {
             </main>
           </div>
         )}
-
-          {item.__tipo === "discente" && (
+        {item.__tipo === "discente" && (
             <div
               className="
                 max-w-6xl mx-auto
@@ -270,9 +265,6 @@ export default function Modal({ item, onClose }) {
                     shadow-xl
                     bg-gray-200
                   "
-                  onError={(e) => {
-                    e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
-                  }}
                 />
 
                 <div className="space-y-2">
@@ -373,8 +365,6 @@ export default function Modal({ item, onClose }) {
               
             </div>
           )}
-          
-
           {item.__tipo === "projeto" && (
             <div className="max-w-5xl mx-auto space-y-6 lg:space-y-8">
 
@@ -423,9 +413,6 @@ export default function Modal({ item, onClose }) {
                     w-auto
                     object-contain
                   "
-                  onError={(e) => {
-                    e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
-                  }}
                 />
 
                 <div className="space-y-3 lg:space-y-4 text-center">
@@ -487,9 +474,6 @@ export default function Modal({ item, onClose }) {
                   object-contain
                   mx-auto
                 "
-                onError={(e) => {
-                  e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
-                }}
               />
 
               <div className="space-y-2 lg:space-y-3">

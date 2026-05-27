@@ -1,5 +1,3 @@
-import { BUCKET_URL } from "../services/supabase";
-
 export default function Proyecto() {
   return (
     <section id="proyecto" className="px-4">
@@ -28,12 +26,9 @@ export default function Proyecto() {
           "
         >
           <img
-            src={`${BUCKET_URL}delfin.jpg`}
+            src="https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/delfin.jpg"
             alt="Programa Delfín"
             className="w-56 md:w-72 lg:w-[380px] h-auto"
-            onError={(e) => {
-              e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
-            }}
           />
         </div>
 
