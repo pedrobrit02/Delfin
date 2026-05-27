@@ -68,13 +68,13 @@ const Card = ({ item, onClick }) => {
           <img
             src={
               ehPessoa
-                ? item.imagen || "/images/avatar-placeholder.png"
-                : item.logo || item.imagen || "/images/logo-placeholder.png"
+                ? item.imagen || "images/avatar-placeholder.png"
+                : item.logo || item.imagen || "images/logo-placeholder.png"
             }
             alt={titulo}
             className="w-full h-full object-cover"
             onError={(e) => {
-              e.currentTarget.src = "/images/logo-placeholder.png";
+              e.currentTarget.src = "images/logo-placeholder.png";
             }}
           />
         </div>

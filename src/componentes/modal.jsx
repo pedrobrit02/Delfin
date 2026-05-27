@@ -99,7 +99,7 @@ export default function Modal({ item, onClose }) {
             <aside className="space-y-6 lg:space-y-8 lg:sticky lg:top-10 self-start">
 
               <img
-                src={item.imagen || "/images/avatar-placeholder.png"}
+                src={item.imagen || "images/avatar-placeholder.png"}
                 alt={item.nombre}
                 className="
                   w-40 h-40
@@ -235,7 +235,7 @@ export default function Modal({ item, onClose }) {
                 "
               >
                 <img
-                  src={item.imagen || "/images/avatar-placeholder.png"}
+                  src={item.imagen || "images/avatar-placeholder.png"}
                   alt={item.nombre}
                   className="
                     w-40 h-40
@@ -387,7 +387,7 @@ export default function Modal({ item, onClose }) {
               <div className="flex flex-col items-center gap-6 lg:gap-8">
 
                 <img
-                  src={item.logo || "/images/logo-placeholder.png"}
+                  src={item.logo || "images/logo-placeholder.png"}
                   alt={item.nombre}
                   className="
                     max-h-32
@@ -397,7 +397,7 @@ export default function Modal({ item, onClose }) {
                     object-contain
                   "
                   onError={(e) => {
-                    e.currentTarget.src = "/images/logo-placeholder.png";
+                    e.currentTarget.src = "images/logo-placeholder.png";
                   }}
                 />
 
@@ -450,7 +450,7 @@ export default function Modal({ item, onClose }) {
             <div className="max-w-6xl mx-auto space-y-8 lg:space-y-10">
 
               <img
-                src={item.imagen || "/images/logo-placeholder.png"}
+                src={item.imagen || "images/logo-placeholder.png"}
                 alt={item.nombre}
                 className="
                   max-h-32
@@ -461,7 +461,7 @@ export default function Modal({ item, onClose }) {
                   mx-auto
                 "
                 onError={(e) => {
-                  e.currentTarget.src = "/images/logo-placeholder.png";
+                  e.currentTarget.src = "images/logo-placeholder.png";
                 }}
               />
 

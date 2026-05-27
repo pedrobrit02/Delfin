@@ -26,7 +26,7 @@ export default function Proyecto() {
           "
         >
           <img
-            src="/images/delfin.jpg"
+            src="images/delfin.jpg"
             alt="Programa Delfín"
             className="w-56 md:w-72 lg:w-[380px] h-auto"
           />
