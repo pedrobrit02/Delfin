@@ -1,5 +1,24 @@
 import { useEffect, useState } from "react";
-import { BUCKET_URL } from "../services/supabase";
+
+const LINKS_DIRETOS = {
+  "delfin.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/delfin.jpg",
+  "Foto_Maye.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Foto_Maye.jpg",
+  "ifmg_ibirite.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/ifmgibirite.jpg",
+  "ifmg_ibirite (1).jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/ifmgibirite.jpg",
+  "Jorge.jpeg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Jorge.jpeg",
+  "JORGE_BALDARRAGO.jpeg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/JORGEBALDARRAGO.jpeg",
+  "logo_Flui.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/logo_Flui.jpg",
+  "Nancy.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Nancy.jpg",
+  "Paola.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Paola.jpg",
+  "pedro.jpeg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/pedro.jpeg",
+  "UCV.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/UCV.jpg"
+};
+
+const getImageUrl = (arquivo) => {
+  const fallback = "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/logo_Flui.jpg";
+  if (!arquivo) return fallback;
+  return LINKS_DIRETOS[arquivo] || fallback;
+};
 
 export default function Modal({ item, onClose }) {
   const [equipos, setEquipos] = useState([]);
@@ -99,7 +118,7 @@ export default function Modal({ item, onClose }) {
             <aside className="space-y-6 lg:space-y-8 lg:sticky lg:top-10 self-start">
 
               <img
-                src={`${BUCKET_URL}${item.imagen}`}
+                src={getImageUrl(item.imagen)}
                 alt={item.nombre}
                 className="
                   w-40 h-40
@@ -107,9 +126,6 @@ export default function Modal({ item, onClose }) {
                   lg:w-72 lg:h-72
                   rounded-3xl object-cover shadow-xl bg-gray-200
                 "
-                onError={(e) => {
-                  e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
-                }}
               />
 
               <div className="space-y-2">
@@ -216,6 +232,7 @@ export default function Modal({ item, onClose }) {
             </main>
           </div>
         )}
+
         {item.__tipo === "discente" && (
             <div
               className="
@@ -237,7 +254,7 @@ export default function Modal({ item, onClose }) {
                 "
               >
                 <img
-                  src={`${BUCKET_URL}${item.imagen}`}
+                  src={getImageUrl(item.imagen)}
                   alt={item.nombre}
                   className="
                     w-40 h-40
@@ -248,9 +265,6 @@ export default function Modal({ item, onClose }) {
                     shadow-xl
                     bg-gray-200
                   "
-                  onError={(e) => {
-                    e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
-                  }}
                 />
 
                 <div className="space-y-2">
@@ -390,7 +404,7 @@ export default function Modal({ item, onClose }) {
               <div className="flex flex-col items-center gap-6 lg:gap-8">
 
                 <img
-                  src={`${BUCKET_URL}${item.logo}`}
+                  src={getImageUrl(item.logo)}
                   alt={item.nombre}
                   className="
                     max-h-32
@@ -399,9 +413,6 @@ export default function Modal({ item, onClose }) {
                     w-auto
                     object-contain
                   "
-                  onError={(e) => {
-                    e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
-                  }}
                 />
 
                 <div className="space-y-3 lg:space-y-4 text-center">
@@ -453,7 +464,7 @@ export default function Modal({ item, onClose }) {
             <div className="max-w-6xl mx-auto space-y-8 lg:space-y-10">
 
               <img
-                src={`${BUCKET_URL}${item.imagen}`}
+                src={getImageUrl(item.imagen)}
                 alt={item.nombre}
                 className="
                   max-h-32
@@ -463,9 +474,6 @@ export default function Modal({ item, onClose }) {
                   object-contain
                   mx-auto
                 "
-                onError={(e) => {
-                  e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
-                }}
               />
 
               <div className="space-y-2 lg:space-y-3">

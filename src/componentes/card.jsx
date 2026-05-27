@@ -1,5 +1,4 @@
 import { memo } from "react";
-import { BUCKET_URL } from "../services/supabase";
 import {
   GlobeAltIcon,
   AcademicCapIcon,
@@ -8,6 +7,29 @@ import {
   BeakerIcon,
   CpuChipIcon
 } from "@heroicons/react/24/outline";
+
+// Dicionário com os LINKS INTEIROS E DIRETOS. 
+// O lado esquerdo é o que o banco manda. O lado direito é o link real da imagem.
+const LINKS_DIRETOS = {
+  "delfin.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/delfin.jpg",
+  "Foto_Maye.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Foto_Maye.jpg",
+  "ifmg_ibirite.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/ifmgibirite.jpg",
+  "ifmg_ibirite (1).jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/ifmgibirite.jpg",
+  "Jorge.jpeg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Jorge.jpeg",
+  "JORGE_BALDARRAGO.jpeg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/JORGEBALDARRAGO.jpeg",
+  "logo_Flui.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/logo_Flui.jpg",
+  "Nancy.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Nancy.jpg",
+  "Paola.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/Paola.jpg",
+  "pedro.jpeg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/pedro.jpeg",
+  "UCV.jpg": "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/UCV.jpg"
+};
+
+// Função que puxa o link inteiro da lista acima
+const getImageUrl = (arquivo) => {
+  const fallback = "https://arfnujtwijrplpasqvhj.supabase.co/storage/v1/object/public/Assets/logo_Flui.jpg";
+  if (!arquivo) return fallback;
+  return LINKS_DIRETOS[arquivo] || fallback;
+};
 
 function Icone({ item }) {
   const cls = "w-14 h-14 text-indigoDark";
@@ -52,7 +74,7 @@ const Card = ({ item, onClick }) => {
   const ehInstitucion = item.__tipo === "instituicao";
   const ehLaboratorio = item.__tipo === "laboratorio";
 
-  const arquivo = ehPessoa ? item.imagen : (item.logo || item.imagen);
+  const arquivoBanco = ehPessoa ? item.imagen : (item.logo || item.imagen);
 
   return (
     <div
@@ -68,12 +90,9 @@ const Card = ({ item, onClick }) => {
       {(ehPessoa || ehInstitucion || ehLaboratorio) ? (
         <div className="w-28 h-28 rounded-xl overflow-hidden shadow bg-gray-100 flex items-center justify-center">
           <img
-            src={`${BUCKET_URL}${arquivo}`}
+            src={getImageUrl(arquivoBanco)}
             alt={titulo}
             className="w-full h-full object-cover"
-            onError={(e) => {
-              e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
-            }}
           />
         </div>
       ) : (
