@@ -9,11 +9,11 @@ import {
   CpuChipIcon
 } from "@heroicons/react/24/outline";
 
-// Mapeamento corrigido baseado nos seus links do Supabase
+// Mapeamento exato dos nomes dos arquivos conforme você forneceu
 const MAPPINGS = {
-  "ifmg_ibirite.jpg": "ifmg_ibirite%20(1).jpg",
   "delfin.jpg": "delfin.jpg",
   "Foto_Maye.jpg": "Foto_Maye.jpg",
+  "ifmg_ibirite.jpg": "ifmg_ibirite%20(1).jpg",
   "Jorge.jpeg": "Jorge.jpeg",
   "JORGE_BALDARRAGO.jpeg": "JORGE_BALDARRAGO.jpeg",
   "logo_Flui.jpg": "logo_Flui.jpg",
@@ -66,9 +66,10 @@ const Card = ({ item, onClick }) => {
   const ehInstitucion = item.__tipo === "instituicao";
   const ehLaboratorio = item.__tipo === "laboratorio";
 
-  // Lógica para definir o nome da imagem e aplicar o mapeamento
+  // Identifica qual campo contém o nome do arquivo
   let nomeArquivo = ehPessoa ? item.imagen : (item.logo || item.imagen);
-  
+
+  // Aplica o mapeamento se existir no dicionário
   if (nomeArquivo && MAPPINGS[nomeArquivo]) {
     nomeArquivo = MAPPINGS[nomeArquivo];
   }
@@ -91,6 +92,7 @@ const Card = ({ item, onClick }) => {
             alt={titulo}
             className="w-full h-full object-cover"
             onError={(e) => {
+              // Fallback forçado caso a imagem específica falhe
               e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
             }}
           />

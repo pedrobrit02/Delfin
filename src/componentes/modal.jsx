@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react";
 import { supabase, BUCKET_URL } from "../services/supabase";
 
-// Dicionário de correção para garantir que o nome do arquivo no banco case com o nome no storage
+// Dicionário de correção completo para garantir que o nome do arquivo no banco case com o storage
 const MAPPINGS = {
   "ifmg_ibirite.jpg": "ifmg_ibirite%20(1).jpg",
+  "delfin.jpg": "delfin.jpg",
+  "Foto_Maye.jpg": "Foto_Maye.jpg",
+  "Jorge.jpeg": "Jorge.jpeg",
+  "JORGE_BALDARRAGO.jpeg": "JORGE_BALDARRAGO.jpeg",
+  "logo_Flui.jpg": "logo_Flui.jpg",
+  "Nancy.jpg": "Nancy.jpg",
+  "Paola.jpg": "Paola.jpg",
+  "pedro.jpeg": "pedro.jpeg",
+  "UCV.jpg": "UCV.jpg"
 };
 
 export default function Modal({ item, onClose }) {
