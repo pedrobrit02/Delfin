@@ -9,6 +9,20 @@ import {
   CpuChipIcon
 } from "@heroicons/react/24/outline";
 
+// Mapeamento corrigido baseado nos seus links do Supabase
+const MAPPINGS = {
+  "ifmg_ibirite.jpg": "ifmg_ibirite%20(1).jpg",
+  "delfin.jpg": "delfin.jpg",
+  "Foto_Maye.jpg": "Foto_Maye.jpg",
+  "Jorge.jpeg": "Jorge.jpeg",
+  "JORGE_BALDARRAGO.jpeg": "JORGE_BALDARRAGO.jpeg",
+  "logo_Flui.jpg": "logo_Flui.jpg",
+  "Nancy.jpg": "Nancy.jpg",
+  "Paola.jpg": "Paola.jpg",
+  "pedro.jpeg": "pedro.jpeg",
+  "UCV.jpg": "UCV.jpg"
+};
+
 function Icone({ item }) {
   const cls = "w-14 h-14 text-indigoDark";
 
@@ -50,8 +64,14 @@ const Card = ({ item, onClick }) => {
     item.__tipo === "discente";
 
   const ehInstitucion = item.__tipo === "instituicao";
-
   const ehLaboratorio = item.__tipo === "laboratorio";
+
+  // Lógica para definir o nome da imagem e aplicar o mapeamento
+  let nomeArquivo = ehPessoa ? item.imagen : (item.logo || item.imagen);
+  
+  if (nomeArquivo && MAPPINGS[nomeArquivo]) {
+    nomeArquivo = MAPPINGS[nomeArquivo];
+  }
 
   return (
     <div
@@ -67,11 +87,7 @@ const Card = ({ item, onClick }) => {
       {(ehPessoa || ehInstitucion || ehLaboratorio) ? (
         <div className="w-28 h-28 rounded-xl overflow-hidden shadow bg-gray-100 flex items-center justify-center">
           <img
-            src={
-              ehPessoa
-                ? `${BUCKET_URL}${item.imagen}`
-                : `${BUCKET_URL}${item.logo || item.imagen}`
-            }
+            src={nomeArquivo ? `${BUCKET_URL}${nomeArquivo}` : `${BUCKET_URL}logo_Flui.jpg`}
             alt={titulo}
             className="w-full h-full object-cover"
             onError={(e) => {

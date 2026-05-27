@@ -31,6 +31,9 @@ export default function Proyecto() {
             src={`${BUCKET_URL}delfin.jpg`}
             alt="Programa Delfín"
             className="w-56 md:w-72 lg:w-[380px] h-auto"
+            onError={(e) => {
+              e.currentTarget.src = `${BUCKET_URL}logo_Flui.jpg`;
+            }}
           />
         </div>
 

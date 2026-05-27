@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase, BUCKET_URL } from "../services/supabase";
 
+// Dicionário de correção para garantir que o nome do arquivo no banco case com o nome no storage
+const MAPPINGS = {
+  "ifmg_ibirite.jpg": "ifmg_ibirite%20(1).jpg",
+};
+
 export default function Modal({ item, onClose }) {
   const [equipos, setEquipos] = useState([]);
 
@@ -10,6 +15,13 @@ export default function Modal({ item, onClose }) {
       document.body.style.overflow = "";
     };
   }, []);
+
+  // Função auxiliar para aplicar o mapeamento de nome de arquivo
+  const getImageUrl = (filename) => {
+    if (!filename) return `${BUCKET_URL}logo_Flui.jpg`;
+    const targetName = MAPPINGS[filename] || filename;
+    return `${BUCKET_URL}${targetName}`;
+  };
 
   const SectionBox = ({ title, children }) => (
     <section className="space-y-2">
@@ -99,7 +111,7 @@ export default function Modal({ item, onClose }) {
             <aside className="space-y-6 lg:space-y-8 lg:sticky lg:top-10 self-start">
 
               <img
-                src={`${BUCKET_URL}${item.imagen}`}
+                src={getImageUrl(item.imagen)}
                 alt={item.nombre}
                 className="
                   w-40 h-40
@@ -238,7 +250,7 @@ export default function Modal({ item, onClose }) {
                 "
               >
                 <img
-                  src={`${BUCKET_URL}${item.imagen}`}
+                  src={getImageUrl(item.imagen)}
                   alt={item.nombre}
                   className="
                     w-40 h-40
@@ -393,7 +405,7 @@ export default function Modal({ item, onClose }) {
               <div className="flex flex-col items-center gap-6 lg:gap-8">
 
                 <img
-                  src={`${BUCKET_URL}${item.logo}`}
+                  src={getImageUrl(item.logo)}
                   alt={item.nombre}
                   className="
                     max-h-32
@@ -456,7 +468,7 @@ export default function Modal({ item, onClose }) {
             <div className="max-w-6xl mx-auto space-y-8 lg:space-y-10">
 
               <img
-                src={`${BUCKET_URL}${item.imagen}`}
+                src={getImageUrl(item.imagen)}
                 alt={item.nombre}
                 className="
                   max-h-32
